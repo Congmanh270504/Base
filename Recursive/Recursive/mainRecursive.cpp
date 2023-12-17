@@ -14,7 +14,7 @@ int main()
 		case 1:
 			do
 			{
-				printf("Nhap so dong t: ");
+				printf("Nhap N: ");
 				if (!scanf("%d", &n))
 					n = -1;
 				fixScanf();

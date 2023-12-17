@@ -1,0 +1,11 @@
+10
+2001222196#Tran#My#Duyen#9.8#Nu
+2001222596#Tran#Cong#Manh#7.8#Nam
+2010511465#Phan#Ngoc#Thach#8.9#Nam
+2022011234#Nguyen#Tat Thanh#Cang#6.75#Nam
+2022012827#Duong#Tan#Quy#7.5#Nu
+2022015821#Tran#Le Hoang#Ha#8.43#Nam
+2022013932#Bach#Thu#Ha#6.15#Nu
+2022019125#Ta#Nhu#Ha#7.73#Nu
+2022017124#Nguyen#Minh#Son#8.8#Nam
+2022022244#Cao#Hoang#Tan#7.35#Nam

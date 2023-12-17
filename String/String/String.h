@@ -11,7 +11,7 @@
 void menu();
 
 void Input(char*& s1, char*& s2);
-void Output(char* s1, char* s2);
+void Output(char* s1);
 
 void deleteEndline(char*& s);
 
@@ -21,6 +21,9 @@ void fixScanf();
 void readFile(const char* filename, char* s1, char* s2);
 void writeFile(const char* filename, char* s1, char* s2);
 
+void realForm(char*& s);
+
 int checkS1String(char*& s1);
-void insertFirstName(char* s1, char* s2, int startPos);
+void insertSubStr(char* s1, char* s2, int startPos);
+void deleteSubStr(char*& s, int index, int numChar);
 #endif

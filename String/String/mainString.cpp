@@ -6,7 +6,7 @@ int main()
 	char* s2 = new char[MaxSize];
 	const char* fi = "input-String.txt";
 	const char* fo = "output-String.txt";
-	int startPos, choose, check;
+	int startPos, choose = -1, check;
 
 	int a = strlen(s1);
 	memset(s1, 0, MaxSize);
@@ -16,17 +16,24 @@ int main()
 	do
 	{
 		printf("Nhap bai muon lam: ");
-		scanf("%d", &choose);
+		if (!scanf("%d", &choose))
+		{
+			choose = -1;
+		}
 		fixScanf();
-
 		switch (choose)
 		{
 		case 1:
 			Input(s1, s2);
-			Output(s1, s2);
+			realForm(s1);
+			realForm(s2);
+			Output(s1);
+			Output(s2);
 			break;
 		case 2:
 			readFile(fi, s1, s2);
+			
+
 		case 3:
 			if ((int)s1[0] == '\0' || (int)s2 == '\0')
 			{
@@ -48,6 +55,7 @@ int main()
 				}
 				break;*/
 		case 0:
+			delete s1, s2;
 			printf("HAVE A NICE DAY SIR!!\n");
 			break;
 		default:

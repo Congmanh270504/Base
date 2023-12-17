@@ -3,15 +3,11 @@
 void menu()
 {
 	printf("+============================Menu===============================+\n");
-	printf("|| **************************Init***************************** ||\n");
+	printf("|| ************************* Init **************************** ||\n");
 	printf("|| * 1.Nhap S1,S2 va xuat ra man hinh                        * ||\n");
 	printf("|| * 2.Doc S1,S2 tu File va xuat ra man hinh                 * ||\n");
-	printf("|| **************************Sum***************************  * ||\n");
+	printf("|| ************************* Exam **************************  * ||\n");
 	printf("|| * 3.Xem chuoi S1 co chua so khong                         * ||\n");
-	printf("|| * 5.Tong cac so co chu so dau la chu so le                * ||\n");
-	printf("|| * 6.Tong cac so lon hon tri tuyet doi sau no              * ||\n");
-	printf("|| * 7.Tong cac phan tu tren dong k                          * ||\n");
-	printf("|| * 8.Tong cac phan tu o vi tri bien                        * ||\n");
 	printf("|| **************************WriteFile************************ ||\n");
 	printf("|| * 30.Ghi mang so phan so tu File                          * ||\n");
 	printf("|| * 0.Thoat chuong trinh                                    * ||\n");
@@ -42,21 +38,14 @@ void Input(char*& s1, char*& s2)
 	fflush(stdin);
 	deleteEndline(s2);
 }
-void Output(char* s1, char* s2)
+void Output(char* s1)
 {
-	printf("Character 1 is: %s\n", s1);
-	printf("Character 2 is: %s\n", s2);
+	printf("Character is: %s\n", s1);
 }
-void getvalueindex(char*& s, int& n)
+void Upper(char*& s)
 {
-	for (int i = 0; i < n; i++)
-	{
-		printf("%c\n", s[i]);
-	}
-}
-void upper(char*& s, int& n)
-{
-	for (int i = 0; i < n; i++)
+	int len = strlen(s);
+	for (int i = 0; i < len; i++)
 	{
 		if (s[i] >= 97)
 		{
@@ -64,44 +53,55 @@ void upper(char*& s, int& n)
 		}
 	}
 }
-void uppername(char*& s, int& n)
+void deleteChar(char*& s, int index)
 {
-	if (s[0] >= 97)
+	int len = strlen(s);
+	for (int i = index; i < len; i++)
 	{
-		s[0] -= 32;
+		s[i] = s[i + 1];
 	}
-	for (int i = 1; i < n; i++)
+	s[len - 1] = '\0';
+}
+void deleteExtraWhiteSpace(char*& s)
+{
+	int len = strlen(s);
+	for (int i = 0; i < len; i++)
 	{
-		if (s[i - 1] == ' ' && s[i] >= 97)
+		if (s[i] == ' ' && s[i + 1] == ' ')
 		{
-			s[i] -= 32;
+			deleteChar(s, i);
+			i--;
 		}
-
+		else if (s[i] == '\0')
+		{
+			break;
+		}
+	}
+	if (s[0] == ' ')
+	{
+		deleteChar(s, 0);
+	}
+	if (s[strlen(s) - 1] == ' ')
+	{
+		deleteChar(s, strlen(s));
 	}
 }
-void insertFirstName(char* s1, char* s2, int startPos)
+void realForm(char*& s)
 {
-	int lenFirstName = strlen(s1), lenSecondName = strlen(s2);
-	if (lenFirstName + lenSecondName > MaxSize) return;
-	if (startPos > lenFirstName)	startPos = lenFirstName;
-
-	if (startPos < lenFirstName)
+	Upper(s);
+	int len = strlen(s);
+	for (int i = 1; i < len; i++)
 	{
-		char* temp = new char[lenFirstName - startPos + 1];
-		strcpy(temp, s1 + startPos);
-		puts(temp);
-
-		strcpy(s1 + startPos, s2);
-		puts(s1);
-
-		strcpy(s1 + startPos + lenSecondName, temp);
-		puts(s1);
+		if (s[i - 1] == ' ' && s[i] >= 'A' || s[i] == ' ')
+		{
+			continue;
+		}
+		else
+		{
+			s[i] += 32;
+		}
 	}
-	else
-	{
-		strcpy(s1 + startPos, s2);
-		puts(s1);
-	}
+	deleteExtraWhiteSpace(s);
 }
 void readFile(const char* filename, char* s1, char* s2)
 {
@@ -115,7 +115,6 @@ void readFile(const char* filename, char* s1, char* s2)
 	fgets(s1, MaxSize, fi);
 	fgets(s2, MaxSize, fi);
 	fclose(fi);
-	Output(s1, s2);
 }
 void writeFile(const char* filename, char* s1, char* s2)
 {
@@ -131,15 +130,37 @@ void writeFile(const char* filename, char* s1, char* s2)
 	fputs(s2, fo);
 	fclose(fo);
 }
-int checkS1String(char*& s1)
+void insertSubStr(char* s1, char* s2, int index)
 {
-	int len = strlen(s1);
-	for (int i = 0; i < len; i++)
+	int len1 = strlen(s1), len2 = strlen(s2);
+	if (len1 + len2 > MaxSize) return;
+	if (index > len1)	index = len1;
+
+	if (index < len1)
 	{
-		if (s1[i] >= '1' && s1[i] <= '9')
-		{
-			return 0;
-		}
+		char* temp = new char[len1 - index + 1];
+		strcpy(temp, s1 + index);
+
+		strcpy(s1 + index, s2);
+
+
+		strcpy(s1 + index + len2, temp);
 	}
-	return 1;
+	else
+	{
+		strcpy(s1 + index, s2);
+	}
+}
+void deleteSubStr(char*& s, int index, int numChar)
+{
+	int len = strlen(s);
+	if (index >= len)
+	{
+		return;
+	}
+	if (index + numChar > len)
+	{
+		numChar = len - index;
+	}
+	strcpy(s + index, s + index + numChar);
 }

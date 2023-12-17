@@ -15,15 +15,15 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Recursive\mainRecursive.cpp">
+    <ClCompile Include="Object\mainObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Recursive\Recursive.cpp">
+    <ClCompile Include="Object\Object.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Recursive\Recursive.h">
+    <ClInclude Include="..\..\learnC\TH-KTLT\Object\Object.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
